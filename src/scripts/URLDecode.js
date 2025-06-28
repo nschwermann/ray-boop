@@ -10,7 +10,5 @@
 **/
 
 export function main(input) {
-	
-	input.text = decodeURIComponent(input.text)
-	
+  input.text = decodeURIComponent(input.text);
 }

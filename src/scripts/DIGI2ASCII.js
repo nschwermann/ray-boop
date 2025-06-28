@@ -12,11 +12,11 @@
 function digi2a(str) {
   var split = str.split(/[ ,]+/);
   var arr = [];
-  for (var i = 0, l = split.length; i < l; i ++) {
+  for (var i = 0, l = split.length; i < l; i++) {
     var ascii = String.fromCharCode(split[i]);
     arr.push(ascii);
   }
-  return arr.join('');
+  return arr.join("");
 }
 
 export function main(input) {

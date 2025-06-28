@@ -11,16 +11,16 @@
 **/
 
 function fullUrlEncode(str) {
-    var encoded = '';
+  var encoded = "";
 
-    for (var i = 0; i < str.length; i++) {
-        var h = parseInt(str.charCodeAt(i)).toString(16);
-        encoded += '%' + h;
-    }
+  for (var i = 0; i < str.length; i++) {
+    var h = parseInt(str.charCodeAt(i)).toString(16);
+    encoded += "%" + h;
+  }
 
-    return encoded;
+  return encoded;
 }
 
 export function main(state) {
-    state.text = fullUrlEncode(state.text);
+  state.text = fullUrlEncode(state.text);
 }

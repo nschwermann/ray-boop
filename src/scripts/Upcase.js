@@ -10,7 +10,5 @@
 **/
 
 export function main(input) {
-    
-    input.text = input.text.toUpperCase();
-    
+  input.text = input.text.toUpperCase();
 }

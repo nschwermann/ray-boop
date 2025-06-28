@@ -11,12 +11,12 @@
 
 export function main(state) {
   let rgb = state.text.trim();
-  
+
   // Handle rgb(255,87,51) format by removing rgb( and )
-  if (rgb.toLowerCase().startsWith('rgb(') && rgb.endsWith(')')) {
+  if (rgb.toLowerCase().startsWith("rgb(") && rgb.endsWith(")")) {
     rgb = rgb.slice(4, -1); // Remove 'rgb(' and ')'
   }
-  
+
   const rgbArray = rgb.includes(",") ? rgb.split(",") : rgb.split(" ");
 
   if (rgbArray.length !== 3) return state.postError("Invalid RGB format");
@@ -24,16 +24,15 @@ export function main(state) {
   let hex = "#";
 
   try {
-    rgbArray.forEach(c => {
+    rgbArray.forEach((c) => {
       const value = parseInt(c.trim());
       if (value < 0 || value > 255) {
         throw new Error("RGB values must be between 0 and 255");
       }
-      const hexValue = value.toString(16).padStart(2, '0');
+      const hexValue = value.toString(16).padStart(2, "0");
       hex += hexValue;
     });
-  }
-  catch (error) {
+  } catch (error) {
     return state.postError("Invalid RGB value: " + error.message);
   }
 

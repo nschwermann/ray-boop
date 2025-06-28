@@ -10,6 +10,5 @@
 **/
 
 export function main(input) {
-	input.text = input.text.split('\n').reverse().join('\n')
-	
+  input.text = input.text.split("\n").reverse().join("\n");
 }

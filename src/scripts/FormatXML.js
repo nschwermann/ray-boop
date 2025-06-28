@@ -10,8 +10,8 @@
 	}
 **/
 
-import vkbeautify from 'vkbeautify';
+import vkbeautify from "vkbeautify";
 
 export function main(state) {
-	state.text = vkbeautify.xml(state.text)	
+  state.text = vkbeautify.xml(state.text);
 }

@@ -10,19 +10,19 @@
 **/
 
 export function main(input) {
-    let lines = input.text.split('\n')
-    var result = []
-    lines.forEach(element => {
-      if(element !== "") {
-        var regex = /"(.*?)"/g
-        var matches = [];
-        var match = regex.exec(element);
-        while (match != null) {
-            matches.push(match[1]);
-            match = regex.exec(element);
-        }
-        result.push("<string name=\"" + matches[0] + "\">" + matches[1] + "</string>")
-      }      
-    })   
-    input.text = result.join('\n')
+  let lines = input.text.split("\n");
+  var result = [];
+  lines.forEach((element) => {
+    if (element !== "") {
+      var regex = /"(.*?)"/g;
+      var matches = [];
+      var match = regex.exec(element);
+      while (match != null) {
+        matches.push(match[1]);
+        match = regex.exec(element);
+      }
+      result.push('<string name="' + matches[0] + '">' + matches[1] + "</string>");
+    }
+  });
+  input.text = result.join("\n");
 }

@@ -9,15 +9,14 @@
     "bias": -0.2
 }
  **/
-import Papa from 'papaparse';
+import Papa from "papaparse";
 
 export function main(state) {
-    try {
-        const { data } = Papa.parse(state.text, { header:false });
-        state.text = JSON.stringify(data, null, 2);
-    }
-    catch(error) {
-        state.text = error;
-        state.postError("Invalid CSV")
-    }
+  try {
+    const { data } = Papa.parse(state.text, { header: false });
+    state.text = JSON.stringify(data, null, 2);
+  } catch (error) {
+    state.text = error;
+    state.postError("Invalid CSV");
+  }
 }

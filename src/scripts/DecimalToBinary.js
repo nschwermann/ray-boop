@@ -15,11 +15,11 @@ export function main(state) {
   var result = "";
 
   for (const index in lines) {
-    var text = lines[index].trim();
-    var bin = parseInt(text).toString(2).toUpperCase();
+    var lineText = lines[index].trim();
+    var bin = parseInt(lineText).toString(2).toUpperCase();
 
     if (isNaN(bin)) {
-      result += text;
+      result += lineText;
     } else {
       result += bin;
     }

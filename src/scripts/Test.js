@@ -10,10 +10,9 @@
 **/
 
 export function main(input) {
-	
-	input.postInfo("Hello this is a test!")
-	
-	input.text = `Hello, World! Let's try some syntax highlighting shall we?
+  input.postInfo("Hello this is a test!");
+
+  input.text = `Hello, World! Let's try some syntax highlighting shall we?
 
 var test: String? = "Toast"
 
@@ -42,6 +41,5 @@ This line was added on Fri, 19 Jun 2020 01:01:30 GMT
 <div class="hello">World</div>
 
 "This is quote-unquote \\"escaped\\" if you will."
-`
-	
+`;
 }

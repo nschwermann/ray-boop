@@ -10,5 +10,5 @@
 **/
 
 export function main(input) {
-	input.text = input.text.replace(/\n/g, '');
+  input.text = input.text.replace(/\n/g, "");
 }

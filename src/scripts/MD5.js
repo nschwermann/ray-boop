@@ -9,7 +9,7 @@
 	}
 **/
 
-import CryptoJS from 'crypto-js';
+import CryptoJS from "crypto-js";
 
 export function main(state) {
   state.text = CryptoJS.MD5(state.text).toString();

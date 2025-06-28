@@ -8,7 +8,7 @@
     }
 **/
 
-import CryptoJS from 'crypto-js';
+import CryptoJS from "crypto-js";
 
 export function main(state) {
   state.text = CryptoJS.SHA1(state.text).toString();

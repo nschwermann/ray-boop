@@ -10,7 +10,5 @@
 **/
 
 export function main(input) {
-    
-    input.text = input.text.toLowerCase();
-    
+  input.text = input.text.toLowerCase();
 }

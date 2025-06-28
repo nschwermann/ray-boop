@@ -11,10 +11,10 @@
 **/
 
 export function main(input) {
-    let str = input.text;
-    var out = "";
-    for (var i = 0; i < str.length; i++) {
-         out += `&#${str.charCodeAt(i)};`;
-    }
-    input.text = out;
+  let str = input.text;
+  var out = "";
+  for (var i = 0; i < str.length; i++) {
+    out += `&#${str.charCodeAt(i)};`;
+  }
+  input.text = out;
 }

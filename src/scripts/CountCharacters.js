@@ -9,11 +9,7 @@
 	}
 **/
 
-import { size } from 'lodash';
-
 export function main(input) {
-	
-	input.postInfo(`${size(input.text)} characters`)
-	
+  const count = input.text.length;
+  input.text = `${count} characters`;
 }
-

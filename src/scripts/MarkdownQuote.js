@@ -10,5 +10,8 @@
 **/
 
 export function main(input) {
-    input.text = input.text.split("\n").map(line => "> " + line).join("\n");
+  input.text = input.text
+    .split("\n")
+    .map((line) => "> " + line)
+    .join("\n");
 }

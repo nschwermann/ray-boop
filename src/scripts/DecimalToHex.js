@@ -15,12 +15,12 @@ export function main(state) {
   var result = "";
 
   for (const index in lines) {
-    var text = lines[index].trim();
+    var lineText = lines[index].trim();
 
-    if (isNaN(text)) {
-      result += text;
+    if (isNaN(lineText)) {
+      result += lineText;
     } else {
-      result += parseInt(text).toString(16).toUpperCase();
+      result += parseInt(lineText).toString(16).toUpperCase();
     }
 
     result += "\n";

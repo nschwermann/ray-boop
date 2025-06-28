@@ -10,7 +10,7 @@
 **/
 
 export function main(state) {
-	var all = state.text.split(" ") 
-	all.splice(0, Math.ceil(all.length * 0.3))
-	state.text = all.join(" ")
+  var all = state.text.split(" ");
+  all.splice(0, Math.ceil(all.length * 0.3));
+  state.text = all.join(" ");
 }

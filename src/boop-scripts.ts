@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  Action,
-  ActionPanel,
-  List,
-  Clipboard,
-  showToast,
-  Toast,
-} from "@raycast/api";
+import { Action, ActionPanel, List, Clipboard, showToast, Toast } from "@raycast/api";
 import { useState, useEffect } from "react";
 import { BoopScriptManager } from "./utils/scriptManager";
 import { analyzeClipboardAndSuggestScripts, getScriptSuggestionTooltip } from "./utils/scriptSuggestions";
@@ -26,7 +19,6 @@ interface ScriptInfo {
 export default function BoopScriptsCommand() {
   const [scripts, setScripts] = useState<ScriptInfo[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [clipboardText, setClipboardText] = useState<string>("");
 
   useEffect(() => {
     loadScripts();
@@ -36,11 +28,10 @@ export default function BoopScriptsCommand() {
     try {
       // Get clipboard content for suggestions
       const clipboard = await Clipboard.readText();
-      setClipboardText(clipboard || "");
-      
+
       // Get script suggestions if clipboard has content
       const suggestions = clipboard ? analyzeClipboardAndSuggestScripts(clipboard) : [];
-      const suggestionMap = new Map(suggestions.map(s => [s.scriptKey, s]));
+      const suggestionMap = new Map(suggestions.map((s) => [s.scriptKey, s]));
 
       const scriptNames = BoopScriptManager.getAvailableScripts();
       const scriptInfos: ScriptInfo[] = [];
@@ -48,7 +39,7 @@ export default function BoopScriptsCommand() {
       for (const scriptName of scriptNames) {
         const info = BoopScriptManager.getScriptInfo(scriptName);
         const suggestion = suggestionMap.get(scriptName);
-        
+
         if (info) {
           scriptInfos.push({
             name: info.name,
@@ -86,7 +77,7 @@ export default function BoopScriptsCommand() {
         }
         return a.name.localeCompare(b.name);
       });
-      
+
       setScripts(scriptInfos);
     } catch (error) {
       await showToast({
@@ -134,8 +125,8 @@ export default function BoopScriptsCommand() {
     }
   }
 
-  const suggestedScripts = scripts.filter(s => s.isSuggested);
-  const otherScripts = scripts.filter(s => !s.isSuggested);
+  const suggestedScripts = scripts.filter((s) => s.isSuggested);
+  const otherScripts = scripts.filter((s) => !s.isSuggested);
 
   return React.createElement(
     List,
@@ -144,51 +135,55 @@ export default function BoopScriptsCommand() {
       searchBarPlaceholder: "Search Boop scripts...",
     },
     // Show suggested scripts section if there are any
-    ...(suggestedScripts.length > 0 ? [
-      React.createElement(List.Section, {
-        title: `💡 Suggested for your clipboard content (${suggestedScripts.length})`,
-        children: suggestedScripts.map((script) =>
-          React.createElement(List.Item, {
-            key: script.filename,
-            title: `⭐ ${script.name}`,
-            subtitle: script.description,
-            icon: script.icon,
-            keywords: script.tags.split(',').map(tag => tag.trim()),
-            accessories: script.suggestionConfidence ? [
-              {
-                text: `${Math.round(script.suggestionConfidence * 100)}%`,
-                tooltip: getScriptSuggestionTooltip({
-                  scriptKey: script.filename,
-                  confidence: script.suggestionConfidence,
-                  reasons: script.suggestionReasons || []
-                })
-              }
-            ] : undefined,
-            actions: React.createElement(
-              ActionPanel,
-              {},
-              React.createElement(Action, {
-                title: "Run Script on Clipboard",
-                onAction: () => runScript(script.filename, script.name),
-                icon: "🚀",
+    ...(suggestedScripts.length > 0
+      ? [
+          React.createElement(List.Section, {
+            title: `💡 Suggested for your clipboard content (${suggestedScripts.length})`,
+            children: suggestedScripts.map((script) =>
+              React.createElement(List.Item, {
+                key: script.filename,
+                title: `⭐ ${script.name}`,
+                subtitle: script.description,
+                icon: script.icon,
+                keywords: script.tags.split(",").map((tag) => tag.trim()),
+                accessories: script.suggestionConfidence
+                  ? [
+                      {
+                        text: `${Math.round(script.suggestionConfidence * 100)}%`,
+                        tooltip: getScriptSuggestionTooltip({
+                          scriptKey: script.filename,
+                          confidence: script.suggestionConfidence,
+                          reasons: script.suggestionReasons || [],
+                        }),
+                      },
+                    ]
+                  : undefined,
+                actions: React.createElement(
+                  ActionPanel,
+                  {},
+                  React.createElement(Action, {
+                    title: "Run Script on Clipboard",
+                    onAction: () => runScript(script.filename, script.name),
+                    icon: "🚀",
+                  }),
+                  React.createElement(Action, {
+                    title: "Refresh Suggestions",
+                    onAction: () => loadScripts(),
+                    icon: "🔄",
+                    shortcut: { modifiers: ["cmd"], key: "r" },
+                  }),
+                  React.createElement(Action.CopyToClipboard, {
+                    title: "Copy Script Name",
+                    content: script.name,
+                    shortcut: { modifiers: ["cmd"], key: "c" },
+                  }),
+                ),
               }),
-              React.createElement(Action, {
-                title: "Refresh Suggestions",
-                onAction: () => loadScripts(),
-                icon: "🔄",
-                shortcut: { modifiers: ["cmd"], key: "r" },
-              }),
-              React.createElement(Action.CopyToClipboard, {
-                title: "Copy Script Name",
-                content: script.name,
-                shortcut: { modifiers: ["cmd"], key: "c" },
-              })
             ),
-          })
-        )
-      })
-    ] : []),
-    
+          }),
+        ]
+      : []),
+
     // Show all other scripts section
     React.createElement(List.Section, {
       title: suggestedScripts.length > 0 ? `All Scripts (${otherScripts.length})` : `Scripts (${scripts.length})`,
@@ -198,7 +193,7 @@ export default function BoopScriptsCommand() {
           title: script.name,
           subtitle: script.description,
           icon: script.icon,
-          keywords: script.tags.split(',').map(tag => tag.trim()),
+          keywords: script.tags.split(",").map((tag) => tag.trim()),
           actions: React.createElement(
             ActionPanel,
             {},
@@ -217,10 +212,10 @@ export default function BoopScriptsCommand() {
               title: "Copy Script Name",
               content: script.name,
               shortcut: { modifiers: ["cmd"], key: "c" },
-            })
+            }),
           ),
-        })
-      )
-    })
+        }),
+      ),
+    }),
   );
 }

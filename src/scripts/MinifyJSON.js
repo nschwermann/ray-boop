@@ -11,5 +11,5 @@
 **/
 
 export function main(input) {
-    input.text = JSON.stringify(JSON.parse(input.text));
+  input.text = JSON.stringify(JSON.parse(input.text));
 }

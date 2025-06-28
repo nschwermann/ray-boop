@@ -10,11 +10,11 @@
 **/
 
 export function main(state) {
-	let buf = "";
-	for(let i = 0; i < state.text.length; i ++) {
-		let code = state.text.charCodeAt(i).toString(16);
-		if(code.length < 2) buf += "0";
-		buf += code;
-	}
-	state.text = buf.toUpperCase();
+  let buf = "";
+  for (let i = 0; i < state.text.length; i++) {
+    let code = state.text.charCodeAt(i).toString(16);
+    if (code.length < 2) buf += "0";
+    buf += code;
+  }
+  state.text = buf.toUpperCase();
 }

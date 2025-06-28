@@ -15,11 +15,11 @@ export function main(state) {
   var result = "";
 
   for (const index in lines) {
-    var text = lines[index].trim();
-    var decimal = parseInt(text, 16);
+    var lineText = lines[index].trim();
+    var decimal = parseInt(lineText, 16);
 
     if (isNaN(decimal)) {
-      result += text;
+      result += lineText;
     } else {
       result += decimal;
     }

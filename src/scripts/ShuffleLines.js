@@ -10,16 +10,17 @@
 **/
 
 export function main(input) {
-	let lines = input.text.split('\n');
-	let j = lines.length;
+  let lines = input.text.split("\n");
+  let j = lines.length;
 
-	// Fisher-Yates Shuffle
-	while (j) {
-		i = Math.floor(Math.random() * j--);
-		temp = lines[j];
-		lines[j] = lines[i];
-		lines[i] = temp;
-	}
-	
-	input.text = lines.join('\n');
+  // Fisher-Yates Shuffle
+  let i, temp;
+  while (j) {
+    i = Math.floor(Math.random() * j--);
+    temp = lines[j];
+    lines[j] = lines[i];
+    lines[i] = temp;
+  }
+
+  input.text = lines.join("\n");
 }

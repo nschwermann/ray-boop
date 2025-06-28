@@ -10,23 +10,22 @@
 **/
 
 export function main(input) {
+  let string = input.text;
 
-    let string = input.text
-    
-    let parsedDate = Date.parse(string)
-    
-    if (isNaN(parsedDate)) {
-        parsedDate = new Date(parseInt(string * 1000))
-    } else {
-        parsedDate = new Date(parsedDate)
-    }
-    
-    let out = parsedDate.toUTCString()
-    
-    if (out === "Invalid Date") {
-        input.postError(out)
-        return
-    }
-    
-    input.text = out
+  let parsedDate = Date.parse(string);
+
+  if (isNaN(parsedDate)) {
+    parsedDate = new Date(parseInt(string * 1000));
+  } else {
+    parsedDate = new Date(parsedDate);
+  }
+
+  let out = parsedDate.toUTCString();
+
+  if (out === "Invalid Date") {
+    input.postError(out);
+    return;
+  }
+
+  input.text = out;
 }

@@ -10,7 +10,5 @@
 **/
 
 export function main(input) {
-	
-	input.postInfo(`${input.text.split('\n').length} lines`)
-	
+  input.postInfo(`${input.text.split("\n").length} lines`);
 }

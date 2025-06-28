@@ -11,16 +11,16 @@
 **/
 
 function fullUrlDecode(str) {
-	var codes = str.split("%");
-	var decoded = '';
+  var codes = str.split("%");
+  var decoded = "";
 
-	for (var i = 0; i < codes.length; i++) {
-		decoded += String.fromCharCode(parseInt(codes[i], 16));
-	}
+  for (var i = 0; i < codes.length; i++) {
+    decoded += String.fromCharCode(parseInt(codes[i], 16));
+  }
 
-	return decoded;
+  return decoded;
 }
 
 export function main(state) {
-	state.text = fullUrlDecode(state.text);
+  state.text = fullUrlDecode(state.text);
 }

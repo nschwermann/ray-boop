@@ -9,8 +9,8 @@
 	}
 **/
 
-import { encode } from 'he';
+import { encode } from "he";
 
 export function main(input) {
-	input.text = encode(input.text)
+  input.text = encode(input.text);
 }

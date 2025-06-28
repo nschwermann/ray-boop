@@ -10,32 +10,29 @@
 **/
 
 function convertToJson(urlParams) {
+  return urlParams
+    .replace(/\[\d?\]=/gi, "=")
+    .split("&")
+    .reduce((result, param) => {
+      var [key, value] = param.split("=");
+      value = decodeURIComponent(value || "");
 
-    return urlParams
-        .replace(/\[\d?\]=/gi, '=')
-        .split('&')
-        .reduce((result, param) => {
-            var [key, value] = param.split('=');
-            value = decodeURIComponent(value || '');
+      if (!Object.prototype.hasOwnProperty.call(result, key)) {
+        result[key] = value;
 
-            if (!result.hasOwnProperty(key)) {
-                result[key] = value;
+        return result;
+      }
 
-                return result;
-            }
+      result[key] = [...[].concat(result[key]), value];
 
-            result[key] = [...[].concat(result[key]), value]
-
-            return result
-        }, {});
+      return result;
+    }, {});
 }
 
-export function main(input)
-{
-    try {
-        input.text = JSON.stringify(convertToJson(input.text));
-    } catch (error) {
-        input.postError("Unable to parse given string")
-    }
-
+export function main(input) {
+  try {
+    input.text = JSON.stringify(convertToJson(input.text));
+  } catch {
+    input.postError("Unable to parse given string");
+  }
 }

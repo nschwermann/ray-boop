@@ -10,7 +10,5 @@
 **/
 
 export function main(state) {
-  
   state.text = state.text.trimStart();
-  
 }

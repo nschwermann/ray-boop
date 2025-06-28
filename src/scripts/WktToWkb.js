@@ -9,7 +9,7 @@
   }
 **/
 
-const re = /(?:(?:MULTI)?POINT|(?:MULTI)?LINESTRING|(?:MULTI)?POLYGON)\s*\([()0-9\s,\.\s]+\)/g;
+const re = /(?:(?:MULTI)?POINT|(?:MULTI)?LINESTRING|(?:MULTI)?POLYGON)\s*\([()0-9\s,.s]+\)/g;
 
 export function main(input) {
   try {
@@ -41,10 +41,7 @@ function convert(text) {
         output += handleLineString(tokens, littleEndian);
         break;
       case "POLYGON":
-        output += handlePolygon(
-          getParensSlice(tokens, "POLYGON", false),
-          littleEndian
-        );
+        output += handlePolygon(getParensSlice(tokens, "POLYGON", false), littleEndian);
         break;
       case "MULTIPOINT":
         output += handleMultipoint(tokens, littleEndian);
@@ -70,7 +67,7 @@ function tokenize(memo, char) {
     memo.push(char);
     return;
   }
-  if (/[A-Z0-9\.\-]/.test(char)) {
+  if (/[A-Z0-9.-]/.test(char)) {
     memo[memo.length - 1] = memo[memo.length - 1] + char;
   } else if (/[()]/.test(char)) {
     memo.push(char);
@@ -127,10 +124,7 @@ function handleMultilinestring(arr, littleEndian) {
   out += toUint32(slices.length, littleEndian);
   for (let slice of slices) {
     const pairs = Math.floor(slice.length / 2);
-    out +=
-      toByteOrder(littleEndian) +
-      toUint32(2, littleEndian) +
-      toUint32(pairs, littleEndian);
+    out += toByteOrder(littleEndian) + toUint32(2, littleEndian) + toUint32(pairs, littleEndian);
     for (let token of slice) {
       out += toDouble(token, littleEndian);
     }

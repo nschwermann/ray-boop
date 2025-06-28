@@ -1,4 +1,3 @@
-
 /**
   {
     "api":1,
@@ -15,7 +14,10 @@ export function main(state) {
 }
 
 function fromUnicode(str) {
-  return str.split("\\u").map(u => {
-    return String.fromCharCode(parseInt(u, 16));
-  }).join("");
+  return str
+    .split("\\u")
+    .map((u) => {
+      return String.fromCharCode(parseInt(u, 16));
+    })
+    .join("");
 }

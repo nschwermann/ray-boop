@@ -1,7 +1,8 @@
 /**
 	{
-		"api":1,
-		"name":"YAML to JSON",
+		"api":1  } catch {
+    state.postError("Invalid YAML");
+  }	"name":"YAML to JSON",
 		"description":"Converts YAML to JSON.",
 		"author":"Ivan",
 		"icon":"metamorphose",
@@ -9,15 +10,12 @@
 	}
 **/
 
-import yaml from 'js-yaml';
+import yaml from "js-yaml";
 
 export function main(input) {
-
-	try {
-        input.text = JSON.stringify(yaml.safeLoad(input.text), null, 2)
-	}
-	catch(error) {
-		input.postError("Invalid YAML")
-	}
-	
+  try {
+    input.text = JSON.stringify(yaml.safeLoad(input.text), null, 2);
+  } catch {
+    input.postError("Invalid YAML");
+  }
 }

@@ -13,30 +13,24 @@
  * Credit goes to https://stackoverflow.com/a/1714899
  */
 function convertToQuery(obj, prefix) {
-	let queryParts = []
+  let queryParts = [];
 
-	for (param in obj) {
-		if (obj.hasOwnProperty(param)) {
-			let key = prefix ? prefix + "[]" : param;
-			let value = obj[param];
+  for (const param in obj) {
+    if (Object.prototype.hasOwnProperty.call(obj, param)) {
+      let key = prefix ? prefix + "[]" : param;
+      let value = obj[param];
 
-			queryParts.push(
-				(value !== null && typeof value === "object") ?
-				convertToQuery(value, key) :
-					key + "=" + value
-			);
-		}
-	}
+      queryParts.push(value !== null && typeof value === "object" ? convertToQuery(value, key) : key + "=" + value);
+    }
+  }
 
-	return queryParts.join("&");
+  return queryParts.join("&");
 }
 
-export function main(input)
-{
-    try {
-		input.text = convertToQuery(JSON.parse(input.text));
-    } catch (error) {
-        input.postError("Unable to convert JSON to URL params")
-    }
-
+export function main(input) {
+  try {
+    input.text = convertToQuery(JSON.parse(input.text));
+  } catch {
+    input.postError("Unable to convert JSON to URL params");
+  }
 }

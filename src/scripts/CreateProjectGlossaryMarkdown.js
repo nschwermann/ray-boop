@@ -16,73 +16,69 @@
 /// Fill in the required values, and re-run the Boop Script to generate the glossary.
 ///
 export function main(state) {
-	
-    try {
-        var options = {};
-        if (state.text.trim().toLowerCase() === "help"){
-            state.text = getHelpText();
-        } else if (state.text.trim() === ""){
-            state.text = JSON.stringify(getDefaultParameters());
+  try {
+    var options = {};
+    if (state.text.trim().toLowerCase() === "help") {
+      state.text = getHelpText();
+    } else if (state.text.trim() === "") {
+      state.text = JSON.stringify(getDefaultParameters());
+    } else {
+      options = JSON.parse(state.text);
+
+      var indexEntries = "0ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+      var header = getHeader();
+      var sectionTemplate = getSectionTemplate();
+      var sampleEntries = getSampleEntries();
+
+      var index = "\r\n";
+      var body = "";
+      for (var x = 0; x < indexEntries.length; x++) {
+        var c = indexEntries.charAt(x);
+
+        // Build Index
+        index = index + "[" + c + "](#" + c.toLowerCase() + ") ";
+        if (c === "H" || c === "Q" || c === "Z") index = index + "\r\n";
+
+        // Build Sections
+        var section = sectionTemplate.replace("{idx}", c);
+        if (c === "E" && options.includeSamples) {
+          section = section.replace("{samples}", sampleEntries);
         } else {
-            options = JSON.parse(state.text);
-
-            var indexEntries = "0ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-            var header = getHeader();
-            var sectionTemplate = getSectionTemplate();
-            var sampleEntries = getSampleEntries();
-
-            var index = "\r\n";
-            var body = "";
-            for (var x = 0; x < indexEntries.length; x++)
-            {
-                var c = indexEntries.charAt(x);
-
-                // Build Index
-                index = index + "[" + c + "](#" + c.toLowerCase() + ") "
-                if (c === "H" || c === "Q" || c === "Z") index = index + "\r\n";
-
-                // Build Sections
-                var section = sectionTemplate.replace("{idx}", c)
-                if (c === "E" && options.includeSamples){
-                    section = section.replace("{samples}", sampleEntries);
-                } else {
-                    section = section.replace("{samples}", "");
-                }
-                body = body + section
-            }
-
-            // Put it all together
-            var glossary = header + index + body;
-            
-            state.text = glossary.replace("{projectName}", options.projectName);
+          section = section.replace("{samples}", "");
         }
-	}
-	catch(error) {
-        options = getDefaultParameters();
-        options.error = error.toString();
-        state.text = JSON.stringify(options);
-        //state.text = error.toString()
-		state.postError(error.toString())
-	}
-	
-}
+        body = body + section;
+      }
 
-function getDefaultParameters(){
-    return {
-        projectName: "Project Name",
-        includeSamples: false
+      // Put it all together
+      var glossary = header + index + body;
+
+      state.text = glossary.replace("{projectName}", options.projectName);
     }
+  } catch (error) {
+    options = getDefaultParameters();
+    options.error = error.toString();
+    state.text = JSON.stringify(options);
+    //state.text = error.toString()
+    state.postError(error.toString());
+  }
 }
 
-function getHeader(){
-    return `
+function getDefaultParameters() {
+  return {
+    projectName: "Project Name",
+    includeSamples: false,
+  };
+}
+
+function getHeader() {
+  return `
 # {projectName}
 ## Glossary Of Terms
-`.trim()
+`.trim();
 }
 
-function getSectionTemplate(){
-    return `
+function getSectionTemplate() {
+  return `
 ## {idx}
 {samples}
 [Back to Top](#glossary-of-terms) 
@@ -92,7 +88,7 @@ function getSectionTemplate(){
 }
 
 function getSampleEntries() {
-    return `
+  return `
 
 ### Example Entry
 This example provides a template for how glossary entries should be formatted.
@@ -103,8 +99,8 @@ Sample definition of Example Entry 2. See also [Example Entry](#example-entry).
 `;
 }
 
-function getHelpText(){
-    return `
+function getHelpText() {
+  return `
 Create Project Glossary Markdown File
 =====================================
 

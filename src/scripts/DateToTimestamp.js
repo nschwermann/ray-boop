@@ -10,12 +10,11 @@
 **/
 
 export function main(input) {
+  let parsedDate = Date.parse(input.text);
 
-    let parsedDate = Date.parse(input.text)
-
-    if (isNaN(parsedDate)) {
-        input.postError("Invalid Date")
-    } else {
-        input.text = parsedDate / 1000
-    }
+  if (isNaN(parsedDate)) {
+    input.postError("Invalid Date");
+  } else {
+    input.text = parsedDate / 1000;
+  }
 }

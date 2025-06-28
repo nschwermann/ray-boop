@@ -10,12 +10,11 @@
 **/
 
 export function main(state) {
-	try {
-		state.text = script
-	}
-	catch(error) {
-		state.postError("Something strange happened here...")
-	}
+  try {
+    state.text = script;
+  } catch {
+    state.postError("Something strange happened here...");
+  }
 }
 
 var script = `
@@ -49,4 +48,4 @@ export function main(state) {
 	}
 	
 }
-`
+`;

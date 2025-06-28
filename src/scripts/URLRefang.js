@@ -10,9 +10,9 @@
 **/
 
 export function main(input) {
-    url = input.text;
-    url = url.replace(/\[\.\]/g, ".");
-    url = url.replace(/hXXp/gi, "http");
-    url = url.replace(/\[:\/\/\]/g, "://");
-    input.text = url;
+  let url = input.text;
+  url = url.replace(/\[\.\]/g, ".");
+  url = url.replace(/hXXp/gi, "http");
+  url = url.replace(/\[:\/\/\]/g, "://");
+  input.text = url;
 }

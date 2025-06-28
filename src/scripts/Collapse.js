@@ -10,7 +10,7 @@
 **/
 
 export function main(input) {
-    let split = input.text.split(/\r\n|\r|\n/)
-    input.postInfo(`${split.length} lines collapsed`)
-    input.text = split.join()
+  let split = input.text.split(/\r\n|\r|\n/);
+  input.postInfo(`${split.length} lines collapsed`);
+  input.text = split.join();
 }

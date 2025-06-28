@@ -9,8 +9,8 @@
 	}
 **/
 
-import { encode } from 'js-base64';
+import { encode } from "js-base64";
 
 export function main(input) {
-	input.text = encode(input.text);
+  input.text = encode(input.text);
 }

@@ -11,13 +11,12 @@
 **/
 
 export function main(state) {
-
   try {
     const data = state.text;
+    let parsed;
     eval("parsed = " + data);
     state.text = JSON.stringify(parsed);
-  }
-  catch (ex) {
+  } catch (ex) {
     state.postError(ex.message);
   }
 }
