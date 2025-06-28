@@ -1,0 +1,21 @@
+/**
+	{
+		"api":1,
+		"name":"JSON to YAML",
+		"description":"Converts JSON to YAML.",
+		"author":"Ivan",
+		"icon":"metamorphose",
+		"tags":"markup,convert"
+	}
+**/
+
+import yaml from 'js-yaml';
+
+export function main(input) {
+	try {
+		input.text = yaml.safeDump(JSON.parse(input.text))
+	}
+	catch(error) {
+		input.postError("Invalid JSON")
+	}
+}
