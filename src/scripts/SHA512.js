@@ -11,5 +11,5 @@
 import { createHash } from "crypto";
 
 export function main(state) {
-  state.text = createHash('sha512').update(state.text).digest('hex');
+  state.text = createHash("sha512").update(state.text).digest("hex");
 }

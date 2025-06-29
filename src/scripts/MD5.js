@@ -12,5 +12,5 @@
 import { createHash } from "crypto";
 
 export function main(state) {
-  state.text = createHash('md5').update(state.text).digest('hex');
+  state.text = createHash("md5").update(state.text).digest("hex");
 }
